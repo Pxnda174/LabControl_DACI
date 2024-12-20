@@ -74,42 +74,20 @@
         button:active {
             transform: scale(0.98);
         }
-
-        .status {
-            font-size: 16px;
-            color: green;
-            margin-top: 20px;
-        }
     </style>
-    <script>
-        async function sendCommand(action) {
-            const url = `http://192.168.137.199/${action}`;
-            try {
-                const response = await fetch(url);
-                if (response.ok) {
-                    const statusElement = document.getElementById('status');
-                    statusElement.textContent = `Comando ejecutado: ${action === 'open' ? 'Abrir' : 'Cerrar'}`;
-                    statusElement.style.color = 'green';
-                } else {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-            } catch (error) {
-                const statusElement = document.getElementById('status');
-                statusElement.textContent = `Error: No se pudo ejecutar el comando "${action}"`;
-                statusElement.style.color = 'red';
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
         <header>Laboratorio de Control Industrial</header>
         <span>¿Qué quieres hacer?</span>
         <section>
-            <button class="Open" onclick="sendCommand('open?')">Abrir</button>
-            <button class="Close" onclick="sendCommand('close?')">Cerrar</button>
+            <form action="http://192.168.4.1/open">
+                <button class="Open">Abrir</button>
+            </form>
+            <form action="http://192.168.4.1/close">
+                <button class="Close">Cerrar</button>
+            </form>
         </section>
-        <div id="status" class="status"></div>
     </div>
 </body>
 </html>
