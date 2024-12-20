@@ -78,7 +78,7 @@
     <script>
         async function sendRequest(action) {
             try {
-                const response = await fetch(`http://192.168.137.88/${action}`);
+                const response = await fetch(`192.168.137.8/${action}`);
                 if (response.ok) {
                     alert(`${action} ejecutado correctamente.`);
                 } else {
