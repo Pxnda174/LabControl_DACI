@@ -81,23 +81,13 @@
         <header>Laboratorio de Control Industrial</header>
         <span>¿Qué quieres hacer?</span>
         <section>
-            <button class="Open" onclick="sendRequest('http://192.168.137.88/open')">Abrir</button>
-            <button class="Close" onclick="sendRequest('http://192.168.137.88/close')">Cerrar</button>
+            <form action="http://192.168.137.88/open">
+                <button class="Open">Abrir</button>
+            </form>
+            <form action="http://192.168.137.88/close">
+                <button class="Close">Cerrar</button>
+            </form>
         </section>
     </div>
-
-    <script>
-        function sendRequest(url) {
-            fetch(url)
-                .then(response => {
-                    if (response.ok) {
-                        console.log(`Acción ejecutada correctamente: ${url}`);
-                    } else {
-                        console.error(`Error al ejecutar la acción: ${url}`);
-                    }
-                })
-                .catch(error => console.error('Error en la solicitud:', error));
-        }
-    </script>
 </body>
 </html>
