@@ -75,28 +75,18 @@
             transform: scale(0.98);
         }
     </style>
-    <script>
-        async function sendRequest(action) {
-            try {
-                const response = await fetch(`192.168.137.8/${action}`);
-                if (response.ok) {
-                    alert(`${action} ejecutado correctamente.`);
-                } else {
-                    alert(`Error al ejecutar ${action}: ${response.status}`);
-                }
-            } catch (error) {
-                alert(`Error al conectar con el servidor: ${error.message}`);
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
         <header>Laboratorio de Control Industrial</header>
         <span>¿Qué quieres hacer?</span>
         <section>
-            <button class="Open" onclick="sendRequest('open')">Abrir</button>
-            <button class="Close" onclick="sendRequest('close')">Cerrar</button>
+            <form action="http://192.168.137.88/open">
+                <button class="Open">Abrir</button>
+            </form>
+            <form action="http://192.168.137.88/close">
+                <button class="Close">Cerrar</button>
+            </form>
         </section>
     </div>
 </body>
