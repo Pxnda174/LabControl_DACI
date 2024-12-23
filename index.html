@@ -75,18 +75,19 @@
             transform: scale(0.98);
         }
     </style>
+    <script type="module">
+        const $button = document.querySelector('.open')
+        $button.addEventListener('click', async()=>{
+            await fetch('http://192.168.137/open')
+        })
+    </script>
 </head>
 <body>
     <div class="container">
         <header>Laboratorio de Control Industrial</header>
         <span>¿Qué quieres hacer?</span>
         <section>
-            <form action="http://192.168.137.8/open">
-                <button class="Open">Abrir</button>
-            </form>
-            <form action="http://192.168.137.8/close">
-                <button class="Close">Cerrar</button>
-            </form>
+            <button class="Open">Abrir</button>
         </section>
     </div>
 </body>
