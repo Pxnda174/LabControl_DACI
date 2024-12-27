@@ -74,20 +74,47 @@
         button:active {
             transform: scale(0.98);
         }
+
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+            color: green;
+        }
     </style>
+    <script>
+        async function sendRequest(action) {
+            const url = `http://192.168.100.120/${action}?`; // URL del servidor
+            const statusElement = document.getElementById('status');
+            try {
+                // Enviar la solicitud al servidor
+                const response = await fetch(url);
+                if (response.ok) {
+                    statusElement.textContent = `Solicitud '${action}' enviada correctamente.`;
+                } else {
+                    statusElement.textContent = `Error al enviar la solicitud '${action}': ${response.status}`;
+                    statusElement.style.color = 'red';
+                }
+            } catch (error) {
+                statusElement.textContent = `Error al conectar con el servidor: ${error.message}`;
+                statusElement.style.color = 'red';
+            }
+
+            // Volver a mostrar la página principal después de 2 segundos
+            setTimeout(() => {
+                statusElement.textContent = '';
+            }, 2000);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <header>Laboratorio de Control Industrial</header>
         <span>¿Qué quieres hacer?</span>
         <section>
-            <form action="http://192.168.100.120/open">
-                <button class="Open">Abrir</button>
-            </form>
-            <form action="http://192.168.100.120/close">
-                <button class="Close">Cerrar</button>
-            </form>
+            <button onclick="sendRequest('open')">Abrir</button>
+            <button onclick="sendRequest('close')">Cerrar</button>
         </section>
+        <div id="status" class="status"></div>
     </div>
 </body>
 </html>
