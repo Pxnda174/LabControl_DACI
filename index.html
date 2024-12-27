@@ -83,15 +83,15 @@
     </style>
     <script>
         async function sendRequest(action) {
-            const url = `http://192.168.100.120/${action}?`; // URL del servidor
+            const url = `http://192.168.100.120/${action}`;
             const statusElement = document.getElementById('status');
             try {
-                // Enviar la solicitud al servidor
+                // Enviar solicitud al servidor
                 const response = await fetch(url);
                 if (response.ok) {
                     statusElement.textContent = `Solicitud '${action}' enviada correctamente.`;
                 } else {
-                    statusElement.textContent = `Error al enviar la solicitud '${action}': ${response.status}`;
+                    statusElement.textContent = `Error al enviar '${action}': ${response.status}`;
                     statusElement.style.color = 'red';
                 }
             } catch (error) {
@@ -99,10 +99,10 @@
                 statusElement.style.color = 'red';
             }
 
-            // Volver a mostrar la página principal después de 2 segundos
+            // Restablecer mensaje después de 3 segundos
             setTimeout(() => {
                 statusElement.textContent = '';
-            }, 2000);
+            }, 3000);
         }
     </script>
 </head>
