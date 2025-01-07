@@ -76,43 +76,45 @@
         }
 
         .status {
+            margin-top: 20px;
             font-size: 16px;
             color: green;
-            margin-top: 20px;
         }
     </style>
-    
+    <script>
+        async function sendRequest(action) {
+            const url = `http://192.168.100.120/${action}`;
+            const statusElement = document.getElementById('status');
+            try {
+                // Enviar solicitud al servidor
+                const response = await fetch(url);
+                if (response.ok) {
+                    statusElement.textContent = `Solicitud '${action}' enviada correctamente.`;
+                } else {
+                    statusElement.textContent = `Error al enviar '${action}': ${response.status}`;
+                    statusElement.style.color = 'red';
+                }
+            } catch (error) {
+                statusElement.textContent = `Error al conectar con el servidor: ${error.message}`;
+                statusElement.style.color = 'red';
+            }
+
+            // Restablecer mensaje después de 3 segundos
+            setTimeout(() => {
+                statusElement.textContent = '';
+            }, 3000);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <header>Laboratorio de Control Industrial</header>
         <span>¿Qué quieres hacer?</span>
         <section>
-            <button class="Open" onclick = "sendCommand('open?')">Abrir</button>
-            <button class="Close" onclick = "sendCommand('close?')">Cerrar</button>
+            <button onclick="sendRequest('open')">Abrir</button>
+            <button onclick="sendRequest('close')">Cerrar</button>
         </section>
         <div id="status" class="status"></div>
     </div>
-    <script>
-        
-        async function sendCommand(action) {
-            const url = `http://192.168.137.199/${action}`;
-            try {
-                const response = await fetch(url);
-                if (response.ok) {
-                    const statusElement = document.getElementById('status');
-                    statusElement.textContent = `Comando ejecutado: ${action === 'open' ? 'Abrir' : 'Cerrar'}`;
-                    statusElement.style.color = 'green';
-                } else {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-            } catch (error) {
-                const statusElement = document.getElementById('status');
-                statusElement.textContent = `Error: No se pudo ejecutar el comando "${action}"`;
-                statusElement.style.color = 'red';
-            }
-        }
-    </script>
 </body>
 </html>
-
