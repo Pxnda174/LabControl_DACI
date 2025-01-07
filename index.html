@@ -82,36 +82,25 @@
         }
     </style>
     <script type= "module">
-        const $buttonOpen = document.querySelector('.Open')
-        const $buttonClose = document.querySelector('.Close')
-
-        $buttonOpen.addEventListener('click', async()=>{
-            const response = await fetch('http://192.168.137.199/open?`')
-            if (response.ok) alert('Puerta abierta')
-            else alert('Hubo un problema intenta de nuevo')
-        })
-        $buttonClose.addEventListener('click', async()=>{
-            const response = await fetch('http://192.168.137.199/close?`')
-            if (response.ok) alert('Puerta abierta')
-            else alert('Hubo un problema intenta de nuevo')
-        })
-        //async function sendCommand(action) {
-        //    const url = `http://192.168.137.199/${action}`;
-        //    try {
-        //        const response = await fetch(url);
-        //        if (response.ok) {
-        //            const statusElement = document.getElementById('status');
-        //            statusElement.textContent = `Comando ejecutado: ${action === 'open' ? 'Abrir' : 'Cerrar'}`;
-        //            statusElement.style.color = 'green';
-        //        } else {
-        //            throw new Error('Error en la respuesta del servidor');
-        //        }
-        //    } catch (error) {
-        //        const statusElement = document.getElementById('status');
-        //        statusElement.textContent = `Error: No se pudo ejecutar el comando "${action}"`;
-        //        statusElement.style.color = 'red';
-        //    }
-        //}
+        
+        async function sendCommand(action) {
+            const url = `http://192.168.137.199/${action}`;
+            try {
+                const response = await fetch(url);
+                if (response.ok) {
+                    if (action === "open?")
+                        alert("Puerta abierta")
+                    else
+                        alert("Puerta cerrada")
+                } else {
+                    alert("Algo ocurrio")
+                }
+            } catch (error) {
+                const statusElement = document.getElementById('status');
+                statusElement.textContent = `Error: No se pudo ejecutar el comando "${action}"`;
+                statusElement.style.color = 'red';
+            }
+        }
     </script>
 </head>
 <body>
@@ -119,8 +108,8 @@
         <header>Laboratorio de Control Industrial</header>
         <span>¿Qué quieres hacer?</span>
         <section>
-            <button class="Open">Abrir</button>
-            <button class="Close">Cerrar</button>
+            <button class="Open" onclick = "sendCommand('open?')">Abrir</button>
+            <button class="Close" onclick = "sendCommand('close??')">Cerrar</button>
         </section>
         <div id="status" class="status"></div>
     </div>
