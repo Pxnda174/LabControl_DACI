@@ -100,12 +100,11 @@
             try {
                 const response = await fetch(url);
                 if (response.ok) {
-                    if (action === "open?")
-                        alert("Puerta abierta")
-                    else
-                        alert("Puerta cerrada")
+                    const statusElement = document.getElementById('status');
+                    statusElement.textContent = `Comando ejecutado: ${action === 'open' ? 'Abrir' : 'Cerrar'}`;
+                    statusElement.style.color = 'green';
                 } else {
-                    alert("Algo ocurrio")
+                    throw new Error('Error en la respuesta del servidor');
                 }
             } catch (error) {
                 const statusElement = document.getElementById('status');
